@@ -10,6 +10,8 @@ class Stack
     T data;
     Node* next;
     };
+    //variables
+    int SIZE = 0;
     Node* Top;
     //constructor
     Stack(){
@@ -23,12 +25,10 @@ class Stack
         bool isEmpty();
         T top();
         int stackSize();
-        void printStack();
-
 
 };
 
-template <typename T>
+/*template <typename T>
 void Stack<T>::printStack(){
     int counts = 0;
     Node* ptr = Top;
@@ -39,33 +39,30 @@ while(ptr!=NULL)
  ptr=ptr->next;
 }
 cout<<endl;
-}
+}*/
 template <typename T>
 int Stack<T>::stackSize(){
-    int counts = 0;
-    Node* ptr = Top;
-while(ptr!=NULL)
-{
- counts++;
- ptr=ptr->next;
-}
-cout<<"Size of stack is "<<counts<<endl;
-return counts;
+cout<<"Size of stack is "<<SIZE<<endl;
+return SIZE;
 }
 template <typename T>
 bool Stack <T>::push(T data)
 {
-    if(createNode(data))
-        cout<<data<<" is successfully inserted"<<endl;
+    if(createNode(data)){
+          cout<<data<<" is successfully inserted"<<endl;
+          SIZE++;
+    }
+
 }
 template <typename T>
 T Stack <T>::pop()
 {
-    if(isEmpty()){
+    if(!isEmpty()){
     Node* ptr = Top;
     T temp = Top->data;
     Top=Top->next;
     delete(ptr);
+    SIZE--;
     cout<<temp<<" is successfully popped"<<endl;
     return temp;
     }
@@ -78,16 +75,16 @@ template <typename T>
 bool Stack <T>::isEmpty()
 {
     if(Top==NULL){
-        return false;
+        return true;
     }
     else{
-        return true;
+        return false;
     }
 }
 template <typename T>
 T Stack <T>::top()
 {
-    if(isEmpty()){
+    if(!isEmpty()){
         cout<<"Data in top of stack is "<<Top->data<<endl;
         return Top->data;
     }
